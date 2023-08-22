@@ -94,6 +94,7 @@ input.form-control {
 .hero {
     align-items: center;
     background-image: url('img/fundo-1-100.jpg');
+    background-color: #f8f8f8;
     background-position: 50%;
     background-repeat: no-repeat;
     background-size: cover;
