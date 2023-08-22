@@ -327,6 +327,7 @@ input.form-control {
 
 /* Estilo Footer */
 footer {
+    margin-top: auto;
     background: #fff;
     width: 100%;
     box-shadow: 8px 8px 8px 8px rgba(0, 0, 0, 0.1);
