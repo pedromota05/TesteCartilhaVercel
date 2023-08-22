@@ -310,7 +310,7 @@ hr {
 
 .bd-toc nav a {
   display: block;
-  font-size: 14px;
+  font-size: 13px;
   padding: 0.125rem 0 0.125rem 0.75rem;
   color: inherit;
   text-decoration: none;
@@ -321,10 +321,12 @@ hr {
   color: #3578e5;
 }
 
+.h2-toc-item a {
+  font-weight: 700;
+}
+
 .h3-toc-item a {
-  font-size: 13px !important;
   margin-left: 1.2rem;
-  font-weight: 500;
 }
 
 .text-with-toc {
