@@ -37,7 +37,7 @@ export const HomePage = () => {
                                 <input
                                     className="form-control border-0 rounded-pill pr-5"
                                     type="search"
-                                    placeholder="Search"
+                                    placeholder="Buscar"
                                     aria-label="Search"
                                 />
                                 <div className="input-group-append">
@@ -82,7 +82,7 @@ export const HomePage = () => {
                                     <input
                                         className="form-control border-0 rounded-pill pr-5"
                                         type="search"
-                                        placeholder="Search"
+                                        placeholder="Buscar"
                                         aria-label="Search"
                                     />
                                     <div className="input-group-append">
