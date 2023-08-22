@@ -5,16 +5,41 @@ workbox.routing.registerRoute(
     // Define a rota da sua API, incluindo os parâmetros de consulta
     new RegExp('https://api-cartilha.onrender.com/api/capitulos\\?populate=.*'),
     // Use a estratégia de cache-first
-    new workbox.strategies.CacheFirst({
+    new workbox.strategies.NetworkFirst({
       cacheName: 'api-cache',
-      plugins: [
-        // Configura o cache para armazenar apenas respostas com status 200 (OK)
-        new workbox.cacheableResponse.CacheableResponsePlugin({
-          statuses: [200],
-        }),
-      ],
+      // plugins: [
+      //   // Configura o cache para armazenar apenas respostas com status 200 (OK)
+      //   new workbox.cacheableResponse.CacheableResponsePlugin({
+      //     statuses: [200],
+      //   }),
+      // ],
     })
   );
+
+  self.addEventListener('fetch', (event) => {
+    if (event.request.url.includes('/api/capitulos')) {
+      const promiseChain = fetch(event.request.clone())
+        .catch(() => {
+          return self.registration.sync.register('syncData');
+        });
+      event.waitUntil(promiseChain);
+    }
+  });
+
+  self.addEventListener('sync', (event) => {
+    if (event.tag === 'syncData') {
+      event.waitUntil(syncData());
+    }
+  });
+  
+  function syncData() {
+    return workbox.precaching.cleanupOutdatedCaches()
+      .then(() => {
+        return workbox.precaching.precacheAndRoute(self.__WB_MANIFEST);
+      });
+  }
+  
+  
 
 // Define outras rotas para arquivos estáticos, como ícones e assets
 workbox.routing.registerRoute(
