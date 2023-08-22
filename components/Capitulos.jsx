@@ -203,12 +203,12 @@ export const Capitulos = () => {
                         <ul className="navbar-nav ms-auto d-flex itens-menu-cap">
                             <li className="nav-item mx-3">
                                 <Link className="nav-link back-item-link py-2" href="/edicao-completa" aria-current="page">
-                                    Edição Completa
+                                    <span className="link-text">Edição Completa</span>
                                 </Link> 
                             </li>
                             <li className="nav-item mx-3">
                                 <Link className="nav-link back-item-link py-2" href="/autores" aria-current="page">
-                                    Autores
+                                    <span className="link-text">Autores</span>
                                 </Link>
                             </li>
                         </ul>
@@ -230,12 +230,12 @@ export const Capitulos = () => {
                         <ul className="navbar-nav ms-auto d-flex flex-row">
                             <li className="nav-item text-item-link">
                                 <Link className="nav-link back-item-link" href="/edicao-completa" aria-current="page">
-                                    Edição Completa
+                                    <span className="link-text">Edição Completa</span>
                                 </Link> 
                             </li>
                             <li className="nav-item text-item-link">
                                 <Link className="nav-link back-item-link" href="/autores" aria-current="page">
-                                    Autores
+                                    <span className="link-text">Autores</span>
                                 </Link>
                             </li>
                             {/* Input Search para tela maior que 992px */}
