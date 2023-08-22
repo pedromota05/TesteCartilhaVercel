@@ -446,6 +446,9 @@ footer .container-footer {
         border-radius: 5px;
         display: block;
     }
+    .link-text {
+        padding-left: 10px;
+    }
 }
 
 @media screen and (min-width: 992px) and (max-width: 1060px) {
