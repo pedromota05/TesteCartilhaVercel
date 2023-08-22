@@ -99,7 +99,7 @@ input.form-control {
     background-size: cover;
     display: flex;
     flex-direction: column;
-    height: 65vh;
+    height: 600px;
     justify-content: center;
     padding: 4rem 2rem;
 }
