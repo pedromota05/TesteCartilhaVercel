@@ -448,7 +448,7 @@ footer .container-footer {
         display: block;
     }
     .link-text {
-        padding-left: 10px;
+        padding-left: 10px !important;
     }
 }
 
