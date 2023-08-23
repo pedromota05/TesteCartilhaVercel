@@ -275,9 +275,19 @@ hr {
 /* Fim Estilo dos Textos da Cartilha */
 
 /* Estilo do Table of Contents */
+.table-of-contents li {
+  margin: 0.5rem 0.5rem;
+}
+
 .bd-toc-container {
   position: fixed;
   top: 120px;
+}
+
+.bd-toc {
+  position: sticky;
+  max-height: calc(100vh - 200px);  
+  overflow-y: auto;
 }
 
 :target::before {
@@ -403,18 +413,18 @@ hr {
   }
   .docMainContainer_gTbr {
     flex-grow: 1;
-    max-width: calc(100% - 300px) !important;
+    max-width: calc(100% - 320px) !important;
   }
 }
 
-@media (min-width: 1440px) {
+@media screen and (min-width: 1440px) and (max-width: 1669px) {
   /* Editando o Espaçamento */
   .container {
     max-width: 1320px;
   }
   .docMainContainer_gTbr {
     flex-grow: 1;
-    max-width: calc(100% - 200px);
+    max-width: calc(100% - 250px) !important;
   }
 }
 
@@ -558,6 +568,18 @@ hr {
   }
 }
 
+@media (min-width: 768px) and (max-width: 992px) {
+  .container {
+    max-width: 920px !important;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .container {
+    max-width: 740px !important;
+  }
+}
+
 @media (max-width: 360px) {
   .img-sidebar-top {
     width: 85%;
@@ -595,11 +617,5 @@ hr {
   }
   .bd-toc-container {
     max-width: 350px;
-  }
-  .right-sidebar {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
-    flex-direction: row-reverse;
   }
 }
