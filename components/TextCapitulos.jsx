@@ -52,7 +52,7 @@ const TextCapitulos = ({lista, activeTitle, setActiveTitle}) => {
             const imageCaption = block.data.caption;
             const imageUrl = block.data.file.url;
             const imageAlt = block.data.caption || '';
-            const strapiBaseUrl = 'https://cartilha-imagens-diretas.onrender.com'; // Altere para a URL base correta do Strapi
+            const strapiBaseUrl = 'https://api-cartilha.onrender.com'; // Altere para a URL base correta do Strapi
             const fullImageUrl = `${strapiBaseUrl}${imageUrl}`;
             // const fullImageUrl = "https://cartilha-imagens-diretas.onrender.com/uploads/image_c8fc5493d6.png"
             
