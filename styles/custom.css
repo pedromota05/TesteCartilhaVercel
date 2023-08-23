@@ -488,6 +488,9 @@ footer .container-footer {
     .icone-search {
         right: 25px;
     }
+    .hero {
+        min-height: calc(100vh - 80px); 
+    }
 }
 
 @media (max-width: 375px) {
