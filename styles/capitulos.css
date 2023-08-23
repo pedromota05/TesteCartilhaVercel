@@ -111,17 +111,6 @@ hr {
 /* Fim Estilo Sidebar */
 
 /* Estilo Navbar */
-.slow-collapse {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease; /* Ajuste a duração da transição conforme desejado */
-}
-
-.show-collapse {
-  max-height: 1000px; /* Defina um valor grande o suficiente para acomodar o conteúdo do menu */
-  transition: max-height 0.5s ease; /* Ajuste a duração da transição conforme desejado */
-}
-
 .navbar-nav {
   align-items: center;
 } 
