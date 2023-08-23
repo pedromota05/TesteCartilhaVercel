@@ -103,7 +103,6 @@ input.form-control {
     height: 600px;
     justify-content: center;
     padding: 4rem 2rem;
-    min-height: calc(100vh - 80px); 
 }
 
 .hero .mensagem {
