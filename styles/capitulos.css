@@ -58,13 +58,15 @@ hr {
   padding: 70px 0 0;
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
   width: 300px;
-  min-height: 1000vh;
+  min-height: 100vh;
   flex: 0 0 250px; 
   color: #606770;
   font-weight: 600;
   line-height: 1.5;
   z-index: 1 !important;
   flex-shrink: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .navbar-sidebar__back {
