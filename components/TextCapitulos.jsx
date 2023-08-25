@@ -38,7 +38,7 @@ const TextCapitulos = ({lista, activeTitle, setActiveTitle}) => {
           });
           htmlContent += `<${listType} class="lista">${listItemsHTML}</${listType}>`;
           break;
-        case 'image':
+         case 'image':
             // Use a URL do Cloudinary fornecida no bloco de dados
             const imageSrc = block.data.file.url;
             const imageCaption = block.data.caption;
@@ -47,19 +47,6 @@ const TextCapitulos = ({lista, activeTitle, setActiveTitle}) => {
             htmlContent += `<img src="${imageSrc}" alt="${imageCaption}" />`;
             htmlContent += `<p>${imageCaption}</p>`;
             break;
-         /* case 'image':
-            // Use a URL da imagem fornecida no bloco de dados
-            const imageCaption = block.data.caption;
-            const imageUrl = block.data.file.url;
-            const imageAlt = block.data.caption || '';
-            const strapiBaseUrl = 'https://api-cartilha.onrender.com'; // Altere para a URL base correta do Strapi
-            const fullImageUrl = `${strapiBaseUrl}${imageUrl}`;
-            // const fullImageUrl = "https://cartilha-imagens-diretas.onrender.com/uploads/image_c8fc5493d6.png"
-            
-            // Crie o elemento de imagem com a URL da imagem
-            htmlContent += `<img src="${fullImageUrl}" alt="${imageAlt}" />`;
-            htmlContent += `<p>${imageAlt}</p>`;
-            break;*/
           case 'embed':
             const videoUrl = new URL(block.data.source);
             const videoId = videoUrl.pathname.substring(1); // Remove a barra inicial
