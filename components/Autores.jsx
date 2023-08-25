@@ -42,6 +42,7 @@ export const Autores = () => {
             </Head>
             
             {/* Código Navbar Offcanvas */}
+            <div className="container-autors">
             <nav className="navbar navbar-expand-lg navbar-light bg-white fixed-top" aria-label="Offcanvas navbar large">
                 <div className="container-fluid">
                     <div className="d-flex align-items-center"> 
@@ -162,10 +163,11 @@ export const Autores = () => {
                     )}
                 </div>
             </div>
+            </div>
 
             {/* Código Footer Embrapa */}    
             <footer>
-                <div className="container container-footer">
+                <div className="container container-footer bottom-0 end-0">
                     <div className="title-footer">
                         <p>Embrapa Agropecuária Oeste</p>
                     </div>
