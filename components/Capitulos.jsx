@@ -77,16 +77,27 @@ export const Capitulos = () => {
     }, [isCollapsed]);
     
     //Puxando a API
-    useEffect(() => {
+        useEffect(() => {
         CarregaCapitulos();
         document.title = 'Embrapa Capitulos';
         if (query.activeChapter) {
             setActiveTitle(parseInt(query.activeChapter));
         } else {
-            setActiveTitle(1); // Definir "introducao" como ativo por padrão
+            // setActiveTitle(1); // Definir "introducao" como ativo por padrão
+
+            // Verifica se há capítulos carregados
+            if (data.length > 0) {
+                // Encontra o id mais baixo entre os capítulos
+                const lowestId = data.reduce(
+                    (minId, data) => Math.min(minId, data.id),
+                    data[0].id // Inicializa com o primeiro id
+                );
+
+                setActiveTitle(lowestId); // Define o id mais baixo como ativo
+            }
         }
     }, [query.activeChapter]);
-
+    
     const CarregaCapitulos = async () => {
         const url = 'https://api-cartilha.onrender.com/api/capitulos?populate=*';
         try {
@@ -96,6 +107,16 @@ export const Capitulos = () => {
                 const data = json.data;
                 console.log('API response:', data);
                 setData(data);
+
+                 // Ordenar os capítulos pelo ID
+                const capituloOrdenado = data.sort((a, b) => a.id - b.id);
+
+                // Definir o estado capitulos
+                //setCapitulos(capituloOrdenado);
+
+                // Definir o estado activeTitle com o ID do primeiro capítulo
+                setActiveTitle(capituloOrdenado[0].id);
+                
             } else {
                 throw new Error('Falha na requisição. Código de status: ' + response.status);
             }
