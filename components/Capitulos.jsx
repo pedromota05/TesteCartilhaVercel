@@ -77,12 +77,12 @@ export const Capitulos = () => {
     }, [isCollapsed]);
     
     //Puxando a API
-        useEffect(() => {
+    useEffect(() => {
         CarregaCapitulos();
         document.title = 'Embrapa Capitulos';
         if (query.activeChapter) {
             setActiveTitle(parseInt(query.activeChapter));
-        } else {
+        } else {    
             // setActiveTitle(1); // Definir "introducao" como ativo por padrão
 
             // Verifica se há capítulos carregados
@@ -92,12 +92,11 @@ export const Capitulos = () => {
                     (minId, data) => Math.min(minId, data.id),
                     data[0].id // Inicializa com o primeiro id
                 );
-
                 setActiveTitle(lowestId); // Define o id mais baixo como ativo
             }
         }
     }, [query.activeChapter]);
-    
+
     const CarregaCapitulos = async () => {
         const url = 'https://api-cartilha.onrender.com/api/capitulos?populate=*';
         try {
@@ -178,38 +177,40 @@ export const Capitulos = () => {
                             {/* Botão para Retornar as Opções "Edição Completa e Autores" | Opção Disponível quando a Tela é Menor que 992px */}
                             <button type="button" className="clean-btn navbar-sidebar__back" id="back-button">← Voltar para o menu principal</button>
                             {/* Dropdown do Sumário */}
-                            <a 
-                                className={`list-group-item list-group-item-action d-flex justify-content-between align-items-center ripple ${
-                                isCollapsed ? 'collapsed' : ''
-                                }`}
-                                aria-current="true"
-                                onClick={handleToggle}
-                            >
-                                <span className="w-100 text-primary">Sumário</span>{' '}
-                                <i className={`fas fa-chevron-${isCollapsed ? 'right' : 'down'} icon-deg`}></i>
-                            </a>
-                            {/* Conteúdo do Sidebar, dentro do Dropdown Sumário */}
-                            {data.length > 0 ? (
-                            data.map((item) => (
-                                <ul key={item.id} id="collapseExample1"
-                                    className={`list-group list-group-flush mx-2 py-1 ${isCollapsed ? 'collapse' : 'show'}`}
+                            <div className='thin-scrollbar menu_SIkG'>
+                                <a 
+                                    className={`list-group-item list-group-item-action d-flex justify-content-between align-items-center ripple ${
+                                    isCollapsed ? 'collapsed' : ''
+                                    }`}
+                                    aria-current="true"
+                                    onClick={handleToggle}
                                 >
-                                    <li className={`list-group-item py-2 ${activeTitle === item.id ? 'active' : ''}`}
-                                        onClick={() => { handleTitleClick(item.id); setIsOffcanvasOpen(false);}}
-                                        style={{cursor: 'pointer'}}
+                                    <span className="w-100 text-primary">Sumário</span>{' '}
+                                    <i className={`fas fa-chevron-${isCollapsed ? 'right' : 'down'} icon-deg`}></i>
+                                </a>
+                                {/* Conteúdo do Sidebar, dentro do Dropdown Sumário */}
+                                {data.length > 0 ? (
+                                data.map((item) => (
+                                    <ul key={item.id} id="collapseExample1"
+                                        className={`list-group list-group-flush mx-2 py-1 ${isCollapsed ? 'collapse' : 'show'}`}
                                     >
-                                        <a 
-                                            href={`#capitulo_${item.id}`} 
-                                            className={activeTitle === item.id ? 'active-link-summary' : ''}
+                                        <li className={`list-group-item py-2 ${activeTitle === item.id ? 'active' : ''}`}
+                                            onClick={() => { handleTitleClick(item.id); setIsOffcanvasOpen(false);}}
+                                            style={{cursor: 'pointer'}}
                                         >
-                                            {item.attributes.title}
-                                        </a>
-                                    </li>
-                                </ul>
-                            ))
-                            ) : (
-                                <p className='d-flex justify-content-center' style={{marginTop: 20}}>Carregando dados...</p>
-                            )}
+                                            <a 
+                                                href={`#capitulo_${item.id}`} 
+                                                className={activeTitle === item.id ? 'active-link-summary' : ''}
+                                            >
+                                                {item.attributes.title}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                ))
+                                ) : (
+                                    <p className='d-flex justify-content-center' style={{marginTop: 20}}>Carregando dados...</p>
+                                )}
+                            </div>
                         </div>
                     </div>
                     {/* Opções Retornadas quando o Usuário Aperta no Botão "← Voltar para o menu principal" */}
@@ -345,7 +346,7 @@ export const Capitulos = () => {
             
             {/* Código Footer Embrapa */}  
             <footer>
-                <div className="container container-footer">
+                <div className="container container-footer bottom-0 end-0">
                     <div className="title-footer">
                         <p>Embrapa Agropecuária Oeste</p>
                     </div>
