@@ -79,14 +79,21 @@ hr {
   background-color: #eef0f2;
   border-radius: 5px;
 }
+
+.list-group-item {
+  padding: 0.5rem 1rem !important;
+}
+
 .list-group-item.active{
   background-color: #eef0f2 !important;
 }
+
 .list-group-item a {
   color: #606770;
   line-height: 1.25;
   font-weight: 500;
 }
+
 .active-link-summary {
   color: #3578e5 !important;
 }
