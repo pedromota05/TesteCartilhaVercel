@@ -22,6 +22,7 @@ body {
   width: 100%;
   flex: 1 0;
   min-height: 100vh;
+  margin-bottom: 30px;
 }
 
 .container {
@@ -84,6 +85,7 @@ hr {
 
 .list-group-item {
   padding: 0.5rem 1rem !important;
+  line-height: 1.25;
 }
 
 .list-group-item.active{
@@ -113,7 +115,7 @@ hr {
 .menu_SIkG {
   flex-grow: 1;
   padding: .5rem;
-  max-height: 300px;
+  max-height: 550px;
   overflow-y: scroll;
 }
 
@@ -330,7 +332,6 @@ hr {
 .bd-toc-container {
   position: fixed;
   top: 120px;
-  max-height: calc(100vh - 400px) !important;
   overflow-y: auto;
   margin-right: 15px !important; 
 }
@@ -512,6 +513,9 @@ hr {
   .rounded-pill {
     width: 180px;
   }
+  .pagination-nav__link {
+    margin-right: 20px !important;
+  }
 }
 
 @media (max-width: 992px) {
@@ -594,6 +598,7 @@ hr {
   .bd-toc-container {
     position: sticky !important;
     margin-top: -40px;
+    margin-right: 0 !important;
   }
   .table-of-contents__left-border {
     border-left: none !important;
@@ -696,5 +701,6 @@ hr {
   }
   .bd-toc-container {
     max-width: 350px;
+    max-height: calc(100vh - 400px) !important;
   }
 }
