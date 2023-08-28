@@ -683,6 +683,9 @@ hr {
 }
 
 @media (min-width: 992px) {
+  .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {  
+    --mdb-gutter-x: 0.5rem !important;
+  }
   .docMainContainer_gTbr {
     flex-grow: 1;
     max-width: calc(100% - 150px);
