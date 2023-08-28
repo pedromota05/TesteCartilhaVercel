@@ -37,7 +37,7 @@ const TableOfContents = ({ headerBlocks }) => {
 
     return (
         <div className="container-xxl bd-gutter mt-3 my-md-4 bd-layout">
-            <main className="bd-main order-1 bd-toc-container">
+            <main className="bd-main order-1 bd-toc-container thin-scrollbar-toc">
                 <div className="bd-toc mt-3 mb-5 my-lg-0 mb-lg-5 px-sm-1 text-body-secondary">
                     <button
                         className="btn btn-link p-lg-0 mb-2 mb-lg-0 text-decoration-none bd-toc-toggle d-lg-none full-width-btn"
