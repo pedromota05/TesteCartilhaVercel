@@ -36,6 +36,14 @@ export const Capitulos = () => {
         setIsOffcanvasOpen((prevState) => !prevState);
     };
 
+    const openSidebar = () => {
+      setIsOffcanvasOpen(true);
+    };
+    
+    const closeSidebar = () => {
+      setIsOffcanvasOpen(false);
+    };
+
     //Função para quando o usuário clicar no botão "← Voltar para o menu principal"
     const handleToggleMainNavbar = () => {
         const mainNavbarOptionsMenu = document.getElementById('main-navbar-options-menu');
@@ -161,7 +169,7 @@ export const Capitulos = () => {
             {/* Div que Pega todo o Conteúdo da Página */}
             <div className="container-wrapper">
                 {/* Código Sidebar */}
-                <nav id="sidebarMenu" className={`collapse d-lg-block sidebar bg-white ${isOffcanvasOpen ? 'show' : ''}`} tabIndex="-1">
+                <nav id="sidebarMenu" className={`collapse d-lg-block sidebar bg-white ${isOffcanvasOpen ? 'menu-visible' : 'menu-hidden'}`} tabIndex="-1">
                     <div className="position-sticky">
                         <div id="summary" className="list-group list-group-flush mt-2 py-2">
                             {/* Logo IF / Embrapa Dentro do Menu */}
