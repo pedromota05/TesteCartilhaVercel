@@ -50,6 +50,10 @@ hr {
   text-align: justify;
 }
 
+#summary {
+  transition-duration: 0.5s;
+}
+
 /* Estilo Sidebar */
 .sidebar {
   position: fixed;
