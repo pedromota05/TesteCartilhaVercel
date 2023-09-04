@@ -137,11 +137,18 @@ export const Capitulos = () => {
     }, [data]);
 
     useEffect(() => {
-        if (activeTitle !== null) {
-            localStorage.setItem('activeChapter', activeTitle);
-        }
+        if (activeTitle === null) {
+            // Verifique se data não é nulo e se tem pelo menos um elemento
+            if (data && data.length > 0) {
+              // Se for nulo, defina-o como o primeiro capítulo da API
+              setActiveTitle(data[0].id);
+        
+              // Use useRouter para navegar para o capítulo ativo
+              router.push(`/edicao-completa?activeChapter=${data[0].id}`, undefined, { shallow: true });
+            }
+          }
         scrollToTop();
-    }, [activeTitle]);
+    }, [activeTitle, data, router]);
 
     // Função para rolar a página para o topo
     const scrollToTop = () => {
