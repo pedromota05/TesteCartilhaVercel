@@ -20,6 +20,8 @@ const TextCapitulos = ({lista, activeTitle, setActiveTitle}) => {
 
   function convertToHTML(data) {
     let htmlContent = ''; // Variável para armazenar o conteúdo HTML
+    let isInstituicao = false;
+    let isInsideEmbrapaMilhoESorgo = false;
     
     data.blocks.forEach((block) => {
       switch (block.type) {
@@ -27,9 +29,93 @@ const TextCapitulos = ({lista, activeTitle, setActiveTitle}) => {
           const anchor = block.data.text.replace(/ /g, "_"); // Criar âncora
           htmlContent += `<h${block.data.level} class="titulo" id='${anchor}'>${block.data.text}</h${block.data.level}>`;
           break;
-        case 'paragraph':
-          htmlContent += `<p class="paragrafo">${block.data.text}</p>`;
-          break;
+          case 'paragraph':
+            if (block.data.text.includes("Embrapa Gado de Leite")) {
+              // Se encontrarmos o início do bloco de instituição, defina isInstituicao como verdadeiro
+              isInstituicao = true;
+              htmlContent += `<div class="instituicao">`;
+              htmlContent += `<p class="nome-instituicao">${block.data.text}</p>`;
+            }
+            else if (block.data.text.includes("Embrapa Agropecuária Oeste")) {
+              // Se encontrarmos o início do bloco de instituição, defina isInstituicao como verdadeiro
+              isInstituicao = true;
+              htmlContent += `<div class="instituicao">`;
+              htmlContent += `<p class="nome-instituicao">${block.data.text}</p>`;
+            } 
+            else if (block.data.text.includes("Agência de Desenvolvimento Agrário e Extensão Rural (Agraer)")) {
+              // Se encontrarmos o início do bloco de instituição, defina isInstituicao como verdadeiro
+              isInstituicao = true;
+              htmlContent += `<div class="instituicao">`;
+              htmlContent += `<p class="nome-instituicao">${block.data.text}</p>`;
+            } 
+            else if (block.data.text.includes("Universidade Federal da Grande Dourados (UFGD)")) {
+              // Se encontrarmos o início do bloco de instituição, defina isInstituicao como verdadeiro
+              isInstituicao = true;
+              htmlContent += `<div class="instituicao">`;
+              htmlContent += `<p class="nome-instituicao">${block.data.text}</p>`;
+            }
+            else if (block.data.text.includes("Embrapa Milho e Sorgo")) {
+              // Se encontrarmos o início do bloco de instituição, defina isInstituicao como verdadeiro
+              isInstituicao = true;
+              htmlContent += `<div class="instituicao">`;
+              htmlContent += `<p class="nome-instituicao">${block.data.text}</p>`;
+            } 
+            else if (block.data.text.includes("Embrapa Hortaliças")) {
+              // Se encontrarmos o início do bloco de instituição, defina isInstituicao como verdadeiro
+              isInstituicao = true;
+              htmlContent += `<div class="instituicao">`;
+              htmlContent += `<p class="nome-instituicao">${block.data.text}</p>`;
+            } 
+            else if (isInstituicao) {
+              const parts = block.data.text.split('Site institucional:');
+              const parts1 = block.data.text.split('Fone:');
+              const parts2 = block.data.text.split('Local:');
+              if (parts.length === 2) {
+                // Se houver dois pontos, aplique a formatação desejada
+                const boldText = parts[0].trim();
+                const normalText = parts[1].trim();
+                htmlContent += `<p><strong>${boldText}Site institucional:</strong> ${normalText}</p>`;
+              } 
+              else if (parts1.length === 2) {
+                // Se houver dois pontos, aplique a formatação desejada
+                const boldText = parts1[0].trim();
+                const normalText = parts1[1].trim();
+                htmlContent += `<p><strong>${boldText}Fone:</strong> ${normalText}</p>`;
+              } 
+              else if (parts2.length === 2) {
+                // Se houver dois pontos, aplique a formatação desejada
+                const boldText = parts2[0].trim();
+                const normalText = parts2[1].trim();
+                htmlContent += `<p><strong>${boldText}Local:</strong> ${normalText}</p>`;
+              } 
+              else {
+                // Se não houver dois pontos, adicione o conteúdo normal com a classe "paragrafo"
+                htmlContent += `<p class="paragrafo">${block.data.text}</p>`;
+              }
+            } else {
+              // Se não estivermos no bloco de instituição, adicione o conteúdo normal com a classe "paragrafo"
+              htmlContent += `<p class="paragrafo">${block.data.text}</p>`;
+            }
+            
+            // Verifique se o bloco de instituição foi fechado
+            if (isInstituicao && block.data.text.includes("Local:Dourados, MS")) {
+              htmlContent += `</div>`; // Feche a div do bloco de instituição
+              isInstituicao = false; // Redefina isInstituicao
+            } else if (isInstituicao && block.data.text.includes("Local: Juiz de Fora, MG")) {
+              htmlContent += `</div>`; // Feche a div do bloco de instituição
+              isInstituicao = false; // Redefina isInstituicao
+            } else if (isInstituicao && block.data.text.includes("Local:Campo Grande, MS")) {
+              htmlContent += `</div>`; // Feche a div do bloco de instituição
+              isInstituicao = false; // Redefina isInstituicao
+            } else if (isInstituicao && block.data.text.includes("Local:Sete Lagoas, MG")) {
+              htmlContent += `</div>`; // Feche a div do bloco de instituição
+              isInstituicao = false; // Redefina isInstituicao
+            }
+            else if (isInstituicao && block.data.text.includes("Local:Brasília, DF")) {
+              htmlContent += `</div>`; // Feche a div do bloco de instituição
+              isInstituicao = false; // Redefina isInstituicao
+            }
+            break;
         case 'list':
           const listType = block.data.style === 'ordered' ? 'ol' : 'ul';
           let listItemsHTML = '';
@@ -45,7 +131,7 @@ const TextCapitulos = ({lista, activeTitle, setActiveTitle}) => {
   
             // Crie o elemento de imagem com a URL do Cloudinary
             htmlContent += `<img src="${imageSrc}" alt="${imageCaption}" />`;
-            htmlContent += `<p>${imageCaption}</p>`;
+            htmlContent += `<p class="legenda-img">${imageCaption}</p>`;
             break;
           case 'embed':
             const videoUrl = new URL(block.data.source);
