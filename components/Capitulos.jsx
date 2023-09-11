@@ -21,13 +21,8 @@ export const Capitulos = () => {
     const [activeTitle, setActiveTitle] = useState(null);
 
     const handleTitleClick = (titleId) => {
-        // Atualize o capítulo ativo no estado e no localStorage
         setActiveTitle(titleId);
-        localStorage.setItem('activeChapter', titleId.toString());
-      
-        // Redirecione para a página de conteúdo da API com o capítulo ativo
-        router.push(`/edicao-completa?activeChapter=${titleId}`, undefined, { shallow: true });
-    };  
+    };
 
     const openSidebar = () => {
         setIsOffcanvasOpen(true);
@@ -131,15 +126,15 @@ export const Capitulos = () => {
 
     //Código para deixar o primeiro capitulo ativo e quando atualizar a página manter na mesma
     useEffect(() => {
-        const storedActiveChapter = localStorage.getItem('activeChapter');
-        if (storedActiveChapter && !isNaN(storedActiveChapter)) {
-          setActiveTitle(parseInt(storedActiveChapter));
-        } else {
-          // Defina um valor padrão se não houver capítulo ativo armazenado ou se for inválido
-          setActiveTitle(data[0].id);
+        if (data.length > 0) {
+            const storedActiveChapter = localStorage.getItem('activeChapter');
+            if (storedActiveChapter) {
+                setActiveTitle(parseInt(storedActiveChapter));
+            } else {
+                setActiveTitle(data[0].id);
+            }
         }
     }, [data]);
-      
 
     useEffect(() => {
         if (activeTitle === null) {
@@ -147,6 +142,9 @@ export const Capitulos = () => {
             if (data && data.length > 0) {
               // Se for nulo, defina-o como o primeiro capítulo da API
               setActiveTitle(data[0].id);
+        
+              // Use useRouter para navegar para o capítulo ativo
+              router.push(`/edicao-completa?activeChapter=${data[0].id}`, undefined, { shallow: true });
             }
           }
         scrollToTop();
@@ -170,7 +168,7 @@ export const Capitulos = () => {
             {/* Div que Pega todo o Conteúdo da Página */}
             <div className="container-wrapper">
                 {/* Código Sidebar */}
-                <nav id="sidebarMenu" className={`collapse d-lg-block sidebar bg-white thin-scrollbar ${isOffcanvasOpen ? 'show' : ''}`} tabIndex="-1">
+                <nav id="sidebarMenu" className={`collapse d-lg-block sidebar bg-white ${isOffcanvasOpen ? 'show' : ''}`} tabIndex="-1">
                     <div className="position-sticky">
                         <div id="summary" className="list-group list-group-flush mt-2 py-2">
                             {/* Logo IF / Embrapa Dentro do Menu */}
@@ -186,7 +184,7 @@ export const Capitulos = () => {
                             {/* Botão para Retornar as Opções "Edição Completa e Autores" | Opção Disponível quando a Tela é Menor que 992px */}
                             <button type="button" className="clean-btn navbar-sidebar__back" id="back-button">← Voltar para o menu principal</button>
                             {/* Dropdown do Sumário */}
-                            <div className=''>
+                            <div className='thin-scrollbar menu_SIkG'>
                                 <a 
                                     className={`list-group-item list-group-item-action d-flex justify-content-between align-items-center ripple ${
                                     isCollapsed ? 'collapsed' : ''
