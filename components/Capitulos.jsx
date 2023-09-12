@@ -24,15 +24,18 @@ export const Capitulos = () => {
         // Atualize o capítulo ativo no estado e no localStorage
         setActiveTitle(titleId);
         localStorage.setItem('activeChapter', titleId.toString());
-        
+      
+        // Redirecione para a página de conteúdo da API com o capítulo ativo
+        router.push(`/edicao-completa?activeChapter=${titleId}`, undefined, { shallow: true });
+      
+        // Acesse a propriedade 'id'
         if (activeTitle !== null) {
-            // Acesse a propriedade `id`
-            const chapterId = activeTitle.id;
-          
-            // Redirecione para a página do capítulo
-            router.push(`/edicao-completa?activeChapter=${chapterId}`, undefined, { shallow: true });
+          const chapterId = activeTitle.id;
+      
+          // Redirecione para a página do capítulo
+          router.push(`/edicao-completa?activeChapter=${chapterId}`, undefined, { shallow: true });
         }
-    };   
+    }; 
 
     const openSidebar = () => {
         setIsOffcanvasOpen(true);
@@ -91,19 +94,19 @@ export const Capitulos = () => {
         CarregaCapitulos();
         document.title = 'Embrapa Capitulos';
         if (query.activeChapter) {
-            setActiveTitle(parseInt(query.activeChapter));
+          setActiveTitle(parseInt(query.activeChapter));
         } else {    
-            // setActiveTitle(1); // Definir "introducao" como ativo por padrão
-
-            // Verifica se há capítulos carregados
-            if (data.length > 0) {
-                // Encontra o id mais baixo entre os capítulos
-                const lowestId = data.reduce(
-                    (minId, data) => Math.min(minId, data.id),
-                    data[0].id // Inicializa com o primeiro id
-                );
-                setActiveTitle(lowestId); // Define o id mais baixo como ativo
-            }
+          // setActiveTitle(1); // Definir "introducao" como ativo por padrão
+      
+          // Verifica se há capítulos carregados
+          if (data.length > 0) {
+            // Encontra o id mais baixo entre os capítulos
+            const lowestId = data.reduce(
+              (minId, data) => Math.min(minId, data.id),
+              data[0].id // Inicializa com o primeiro id
+            );
+            setActiveTitle(lowestId); // Define o id mais baixo como ativo
+          }
         }
     }, [query.activeChapter]);
 
