@@ -22,7 +22,8 @@ export const Capitulos = () => {
 
     const handleTitleClick = (titleId) => {
         setActiveTitle(titleId);
-    };
+        localStorage.setItem('activeChapter', titleId.toString()); // Armazena o ID no localStorage
+    };    
 
     const openSidebar = () => {
         setIsOffcanvasOpen(true);
@@ -134,7 +135,7 @@ export const Capitulos = () => {
                 setActiveTitle(data[0].id);
             }
         }
-    }, [data]);
+    }, [data]);    
 
     useEffect(() => {
         if (activeTitle === null) {
