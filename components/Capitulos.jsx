@@ -27,15 +27,7 @@ export const Capitulos = () => {
       
         // Redirecione para a página de conteúdo da API com o capítulo ativo
         router.push(`/edicao-completa?activeChapter=${titleId}`, undefined, { shallow: true });
-      
-        // Acesse a propriedade 'id'
-        if (activeTitle !== null) {
-          const chapterId = activeTitle.id;
-      
-          // Redirecione para a página do capítulo
-          router.push(`/edicao-completa?activeChapter=${chapterId}`, undefined, { shallow: true });
-        }
-    }; 
+    }
 
     const openSidebar = () => {
         setIsOffcanvasOpen(true);
@@ -109,6 +101,16 @@ export const Capitulos = () => {
           }
         }
     }, [query.activeChapter]);
+    
+    useEffect(() => {
+        if (activeTitle !== null) {
+          // Acesse a propriedade 'id'
+          const chapterId = activeTitle.id;
+      
+          // Redirecione para a página do capítulo
+          router.push(`/edicao-completa?activeChapter=${chapterId}`, undefined, { shallow: true });
+        }
+    }, [activeTitle]);
 
     const CarregaCapitulos = async () => {
         const url = 'https://api-cartilha.onrender.com/api/capitulos?populate=*';
