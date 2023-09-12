@@ -159,7 +159,7 @@ const TextCapitulos = ({lista, activeTitle, setActiveTitle}) => {
     });
     return htmlContent;
   }
-  const chapterRefs = useRef({}); // Use useRef to store references to chapter elements
+  const chapterRefs = useRef({}); // Use useRef para armazenar referências a elementos de capítulo
   const currentIndex = lista.findIndex((cap) => cap.id === activeTitle);
   const prevChapter = lista[currentIndex - 1];
   const nextChapter = lista[currentIndex + 1];
