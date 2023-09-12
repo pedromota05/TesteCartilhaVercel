@@ -21,13 +21,8 @@ export const Capitulos = () => {
     const [activeTitle, setActiveTitle] = useState(null);
 
     const handleTitleClick = (titleId) => {
-        // Atualize o capítulo ativo no estado e no localStorage
         setActiveTitle(titleId);
-        localStorage.setItem('activeChapter', titleId.toString());
-      
-        // Redirecione para a página de conteúdo da API com o capítulo ativo
-        router.push(`/edicao-completa?activeChapter=${titleId}`, undefined, { shallow: true });
-    };  
+    };
 
     const openSidebar = () => {
         setIsOffcanvasOpen(true);
