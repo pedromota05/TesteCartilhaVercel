@@ -126,15 +126,15 @@ export const Capitulos = () => {
 
     //Código para deixar o primeiro capitulo ativo e quando atualizar a página manter na mesma
     useEffect(() => {
-        const storedActiveChapter = localStorage.getItem('activeChapter');
-        if (storedActiveChapter && !isNaN(storedActiveChapter)) {
-          setActiveTitle(parseInt(storedActiveChapter));
-        } else {
-          // Defina um valor padrão se não houver capítulo ativo armazenado ou se for inválido
-          setActiveTitle(data[0].id);
+        if (data.length > 0) {
+            const storedActiveChapter = localStorage.getItem('activeChapter');
+            if (storedActiveChapter) {
+                setActiveTitle(parseInt(storedActiveChapter));
+            } else {
+                setActiveTitle(data[0].id);
+            }
         }
     }, [data]);
-      
 
     useEffect(() => {
         if (activeTitle === null) {
