@@ -158,6 +158,9 @@ export const Capitulos = () => {
         });
     };
 
+    const activeChapter = data.find(item => item.id === activeTitle);
+    const displayedTitle = activeChapter ? activeChapter.attributes.title : 'Título do Capítulo';
+
     return(
         <>
             <Head>
@@ -334,7 +337,7 @@ export const Capitulos = () => {
                                     </li>
                                     <li className="breadcrumbs__item breadcrumbs__item--active">
                                         <span className="breadcrumbs__link" itemProp="name">
-                                            {data.find(item => item.id === activeTitle)?.attributes.title || 'Título do Capítulo'}
+                                            {displayedTitle}
                                         </span>
                                         <meta itemProp="position" content="2" />
                                     </li>
