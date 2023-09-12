@@ -7,6 +7,7 @@ export default function Document() {
       <Head>
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/icon-512x512.png"/>
+        <link rel="shortcut icon" href="/logo-512x512.png"/>
         <meta name="theme-color" content="#000" />
         {/* Importação de Links */}
         <Link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
