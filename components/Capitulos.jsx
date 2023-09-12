@@ -21,13 +21,8 @@ export const Capitulos = () => {
     const [activeTitle, setActiveTitle] = useState(null);
 
     const handleTitleClick = (titleId) => {
-        // Atualize o capítulo ativo no estado e no localStorage
         setActiveTitle(titleId);
-        localStorage.setItem('activeChapter', titleId.toString());
-      
-        // Redirecione para a página de conteúdo da API com o capítulo ativo
-        router.push(`/edicao-completa?activeChapter=${titleId}`, undefined, { shallow: true });
-    };  
+    };
 
     const openSidebar = () => {
         setIsOffcanvasOpen(true);
@@ -131,15 +126,15 @@ export const Capitulos = () => {
 
     //Código para deixar o primeiro capitulo ativo e quando atualizar a página manter na mesma
     useEffect(() => {
-        const storedActiveChapter = localStorage.getItem('activeChapter');
-        if (storedActiveChapter && !isNaN(storedActiveChapter)) {
-          setActiveTitle(parseInt(storedActiveChapter));
-        } else {
-          // Defina um valor padrão se não houver capítulo ativo armazenado ou se for inválido
-          setActiveTitle(data[0].id);
+        if (data.length > 0) {
+            const storedActiveChapter = localStorage.getItem('activeChapter');
+            if (storedActiveChapter) {
+                setActiveTitle(parseInt(storedActiveChapter));
+            } else {
+                setActiveTitle(data[0].id);
+            }
         }
     }, [data]);
-      
 
     useEffect(() => {
         if (activeTitle === null) {
@@ -162,9 +157,6 @@ export const Capitulos = () => {
             behavior: 'smooth', // Adicionando um efeito de rolagem suave
         });
     };
-
-    const activeChapter = data.find(item => item.id === activeTitle);
-    const displayedTitle = activeChapter ? activeChapter.attributes.title : 'Título do Capítulo';
 
     return(
         <>
@@ -192,7 +184,7 @@ export const Capitulos = () => {
                             {/* Botão para Retornar as Opções "Edição Completa e Autores" | Opção Disponível quando a Tela é Menor que 992px */}
                             <button type="button" className="clean-btn navbar-sidebar__back" id="back-button">← Voltar para o menu principal</button>
                             {/* Dropdown do Sumário */}
-                            <div className=''>
+                            <div>
                                 <a 
                                     className={`list-group-item list-group-item-action d-flex justify-content-between align-items-center ripple ${
                                     isCollapsed ? 'collapsed' : ''
@@ -342,7 +334,7 @@ export const Capitulos = () => {
                                     </li>
                                     <li className="breadcrumbs__item breadcrumbs__item--active">
                                         <span className="breadcrumbs__link" itemProp="name">
-                                            {displayedTitle}
+                                            {data.find(item => item.id === activeTitle)?.attributes.title || 'Título do Capítulo'}
                                         </span>
                                         <meta itemProp="position" content="2" />
                                     </li>
@@ -351,7 +343,7 @@ export const Capitulos = () => {
                             <section className="home-section right-sidebar" style={{marginTop: 30}}>
                                 {/* Código dos Textos da Cartilha */}
                                 <div id="contents" className="bd-content ps-lg-2">
-                                    <TextCapitulos lista={data} activeTitle={activeTitle} setActiveTitle={setActiveTitle} />
+                                    <TextCapitulos lista = {data} activeTitle={activeTitle} setActiveTitle={setActiveTitle} />
                                 </div>
                             </section>
                         </div>
