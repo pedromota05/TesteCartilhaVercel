@@ -27,7 +27,7 @@ export const Capitulos = () => {
       
         // Redirecione para a página de conteúdo da API com o capítulo ativo
         router.push(`/edicao-completa?activeChapter=${titleId}`, undefined, { shallow: true });
-    };  
+    };   
 
     const openSidebar = () => {
         setIsOffcanvasOpen(true);
