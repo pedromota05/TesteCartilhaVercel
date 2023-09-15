@@ -24,8 +24,11 @@ export const Autores = () => {
             if (response.ok) {
                 const json = await response.json();
                 const data = json.data;
-                console.log('API response:', data);
-                setData(data);
+                // Ordenar os autores por ID (do menor para o maior)
+                const sortedData = data.sort((a, b) => a.id - b.id);
+                
+                console.log('API response:', sortedData);
+                setData(sortedData);
             } else {
                 throw new Error('Falha na requisição. Código de status: ' + response.status);
             }
