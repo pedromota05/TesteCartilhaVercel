@@ -149,25 +149,36 @@ export const Autores = () => {
                         const description = descriptionData.blocks.find(block => block.type === 'paragraph')?.data?.text || 'Descrição não disponível';
 
                         // Obter a URL
-                        const url = 'http://lattes.cnpq.br/0070274390977184'; // Substitua pela URL correta
+                        const lattesLinkBlock = descriptionData.blocks.find(
+                            (block) => block.type === 'paragraph' && block.data.text.includes('Currículo Lattes')
+                        );
+
+                        let lattesUrl = '';
+                            if (lattesLinkBlock) {
+                            const linkRegex = /href="([^"]+)"/; // Regex para extrair o valor do atributo href
+                            const match = lattesLinkBlock.data.text.match(linkRegex);
+                            if (match && match[1]) {
+                                lattesUrl = match[1];
+                            }
+                        }
 
                         return (
                         <div key={item.id} className="card">
                             <div className="containerAutor_v1t1">
                             {/* Imagem dos Autores */}
-                            <div className="containerFoto_oz_I">
-                                <img src={imageUrl} alt="Foto dos Autores" width="100%" />
-                            </div>
-                            {/* Nome dos Autores */}
-                            <p className="bold nome-autor">{item.attributes.name}</p>
+                                <div className="containerFoto_oz_I">
+                                    <img src={imageUrl} alt="Foto dos Autores" width="100%" />
+                                </div>
+                                {/* Nome dos Autores */}
+                                <p className="bold nome-autor">{item.attributes.name}</p>
                             </div>
                             {/* Descrição dos Autores */}
                             <div className="cardContainer_HEVx">
-                            <p className="descricao-autor">{description}</p>
+                                <p className="descricao-autor">{description}</p>
                             </div>
                             {/* Link para o Currículo dos Autores */}
                             <div className="action-card">
-                            <Link target="_blank" href={url}>Currículo Lattes</Link>
+                                <a target="_blank" href={lattesUrl}>Currículo Lattes</a>
                             </div>
                         </div>
                         );
