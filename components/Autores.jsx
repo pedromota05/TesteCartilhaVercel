@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
-import a from 'next/link'
+import Link from 'next/link'
 import Logo from '../public/logo.svg'
 
 export const Autores = () => {
@@ -34,29 +34,6 @@ export const Autores = () => {
         }
     };
 
-    function convertToHTML(data) {
-        let htmlContent = ''; // Variável para armazenar o conteúdo HTML        
-        data.blocks.forEach((block) => {
-          switch (block.type) {
-            case 'image':
-                // Use a URL do Cloudinary fornecida no bloco de dados
-                const imageSrc = block.data.file.url;
-                const imageCaption = block.data.caption;
-                // // Crie o elemento de imagem com a URL do Cloudinary
-                htmlContent += `<div class="containerAutor_v1t1"> <div class="containerFoto_oz_I"><img width="100%" src="${imageSrc}" alt="${imageCaption}" /></div></div>`;
-                htmlContent += `<p class="legenda-img">${imageCaption}</p>`;
-                break;
-            case 'paragraph':
-                htmlContent += `<p class="paragrafo">${block.data.text}</p>`;
-            break;
-             
-              default:
-                break;
-          }
-        });
-        return htmlContent;
-      }
-
     return(
         <>
             <Head>
@@ -73,9 +50,9 @@ export const Autores = () => {
                             <i className="fas fa-bars"></i>
                         </button>
                         {/* Logo Navbar */}
-                        <a className="navbar-brand" href="/home">
+                        <Link className="navbar-brand" href="/home">
                             <Image src={Logo} width={350} height={54} alt="logo Embrapa com letras em azul com um simbolo verde, sendo que as letras em cima do simbolo são brancas"/>
-                        </a>
+                        </Link>
                     </div>
                     {/* Input Search para tela menor que 992px */}
                     <div className="first-form-search">
@@ -102,9 +79,9 @@ export const Autores = () => {
                             <ul className="navbar-nav d-flex links-logo-ifembrapa flex-row mx-1">
                                 {/* Logo IF / Embrapa Dentro do Menu */}
                                 <li className="nav-item">
-                                    <a href="/home">
+                                    <Link href="/home">
                                         <Image src={LogoIFEmbrapa} className='img-navbar-menu me-3' width="100%" height={46} alt="logo Embrapa com letras em azul com um simbolo verde, sendo que as letras em cima do simbolo são brancas" priority/>
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                             <button type="button" className="btn-close btn-close-dark" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -113,14 +90,14 @@ export const Autores = () => {
                         <div className="offcanvas-body">
                             <ul className="navbar-nav justify-content-end flex-grow-1 center-itens">
                                 <li className="nav-item">
-                                    <a className="nav-link back-item-link" href="/edicao-completa" aria-current="page">
+                                    <Link className="nav-link back-item-link" href="/edicao-completa" aria-current="page">
                                         <span className="link-text">Edição Completa</span>
-                                    </a>     
+                                    </Link>     
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link back-item-link" href="/autores" aria-current="page">
+                                    <Link className="nav-link back-item-link" href="/autores" aria-current="page">
                                         <span className="link-text">Autores</span>
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                             {/* Input Search para tela maior que 992px */}
@@ -161,20 +138,42 @@ export const Autores = () => {
                 <div className="main-container-cards container-cards">
                 {/* Puxando os Dados do Fetch */}
                 {data.length > 0 ? (
-                    data.map((item) => (
-                    <div key={item.id} className="card">
-                        {/* Descrição dos Autores */}
-                        <div className="cardContainer_HEVx">
-                            {/* <p className="descricao-autor">{item.attributes.description}</p> */}
+                    data.map((item) => {
+                        // Fazer o parse da propriedade description que está em JSON
+                        const descriptionData = JSON.parse(item.attributes.description);
+
+                        // Obter a URL da imagem
+                        const imageUrl = descriptionData.blocks[0].data.file.url;
+
+                        // Obter a descrição
+                        const description = descriptionData.blocks.find(block => block.type === 'paragraph')?.data?.text || 'Descrição não disponível';
+
+                        // Obter a URL
+                        const url = 'http://lattes.cnpq.br/0070274390977184'; // Substitua pela URL correta
+
+                        return (
+                        <div key={item.id} className="card">
+                            <div className="containerAutor_v1t1">
+                            {/* Imagem dos Autores */}
+                            <div className="containerFoto_oz_I">
+                                <img src={imageUrl} alt="Foto dos Autores" width="100%" />
+                            </div>
+                            {/* Nome dos Autores */}
                             <p className="bold nome-autor">{item.attributes.name}</p>
-
-                             <div dangerouslySetInnerHTML={{ __html: convertToHTML(JSON.parse(item.attributes.description))}}></div> 
-
-                        </div>                    
-                    </div>
-                    ))
+                            </div>
+                            {/* Descrição dos Autores */}
+                            <div className="cardContainer_HEVx">
+                            <p className="descricao-autor">{description}</p>
+                            </div>
+                            {/* Link para o Currículo dos Autores */}
+                            <div className="action-card">
+                            <Link target="_blank" href={url}>Currículo Lattes</Link>
+                            </div>
+                        </div>
+                        );
+                    })
                     ) : (
-                        <p>Carregando dados...</p>
+                    <p>Carregando dados...</p>
                     )}
                 </div>
             </div>
