@@ -19,6 +19,7 @@ export const Capitulos = () => {
     const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
     const [data, setData] = useState([]);
     const [activeTitle, setActiveTitle] = useState(null);
+    const [showSummary, setShowSummary] = useState(true);
 
     const handleTitleClick = (titleId) => {
         setActiveTitle(titleId);
@@ -35,6 +36,10 @@ export const Capitulos = () => {
 
     const handleToggleBackDrop = () => {
         setIsOffcanvasOpen((prevState) => !prevState);
+    };
+    
+    const toggleSummaryAndMainMenu = () => {
+        setShowSummary(!showSummary);
     };
 
     //Função para quando o usuário clicar no botão "← Voltar para o menu principal"
@@ -174,19 +179,19 @@ export const Capitulos = () => {
                 {/* Código Sidebar */}
                 <nav id="sidebarMenu" className={`collapse d-lg-block sidebar bg-white thin-scrollbar ${isOffcanvasOpen ? 'show' : ''}`} tabIndex="-1">
                     <div className="position-sticky">
-                        <div id="summary" className="list-group list-group-flush mt-2 py-2">
+                        <div id="summary" className="list-group list-group-flush mt-2 py-2" style={{ display: showSummary ? 'block' : 'none' }}>
                             {/* Logo IF / Embrapa Dentro do Menu */}
                             <div className='logo-container-fixed'>
                                 <div className="logo-container d-flex align-items-center justify-content-between">
                                     <Link href="/home">
                                         <Image className="img-sidebar-top mx-3" src={LogoIFEmbrapa} alt="logo Embrapa com letras em azul com um símbolo verde, sendo que as letras em cima do símbolo são brancas" width="45%" height={46} priority/>
                                     </Link>
-                                    <button id="btn-close-sidebar" type="button" className="btn-close btn-close-dark btn-close-cap" data-bs-dismiss="collapse" aria-label="Close" onClick={closeSidebar}></button>
+                                    <button id="btn-close-sidebar" type="button" className="btn-close btn-close-dark btn-close-cap" data-bs-dismiss="collapse" aria-label="Close" onClick={() => { closeSidebar(); setShowSummary(false); }}></button>
                                 </div>
                             </div>
                             <hr className="featurette-divider line-menu"></hr>
                             {/* Botão para Retornar as Opções "Edição Completa e Autores" | Opção Disponível quando a Tela é Menor que 992px */}
-                            <button type="button" className="clean-btn navbar-sidebar__back" id="back-button">← Voltar para o menu principal</button>
+                            <button type="button" className="clean-btn navbar-sidebar__back" id="back-button" onClick={() => setShowSummary(true)}>← Voltar para o menu principal</button>
                             {/* Dropdown do Sumário */}
                             <div>
                                 <a 
@@ -225,7 +230,7 @@ export const Capitulos = () => {
                         </div>
                     </div>
                     {/* Opções Retornadas quando o Usuário Aperta no Botão "← Voltar para o menu principal" */}
-                    <div id='main-navbar-options-menu' style={{marginTop: 16}}>
+                    <div id='main-navbar-options-menu' style={{ marginTop: 16, display: showSummary ? 'none' : 'block' }}>
                         <div className="logo-container d-flex align-items-center justify-content-between">
                             <Link href="/home">
                                 <Image className="img-sidebar-top mx-3" src={LogoIFEmbrapa} alt="logo Embrapa com letras em azul com um símbolo verde, sendo que as letras em cima do símbolo são brancas" width="45%" height={46} priority/>
@@ -233,6 +238,7 @@ export const Capitulos = () => {
                             <button id="btn-close-sidebar" type="button" className="btn-close btn-close-dark btn-close-cap" data-bs-dismiss="sidebar" aria-label="Close" onClick={closeSidebar}></button>
                         </div>
                         <hr className="featurette-divider line-menu"></hr>
+                        <button type="button" className="clean-btn navbar-sidebar__back" id="back-button" onClick={toggleSummaryAndMainMenu}>← Voltar para o Sumário</button>
                         <ul className="navbar-nav ms-auto d-flex itens-menu-cap">
                             <li className="nav-item mx-3">
                                 <Link className="nav-link back-item-link py-2" href="/edicao-completa" aria-current="page">
