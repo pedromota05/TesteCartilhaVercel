@@ -93,6 +93,7 @@ const TextCapitulos = ({ lista, activeTitle, setActiveTitle }) => {
 
   function RefconvertToHTML(data) {
     let htmlContent = ''; // Variável para armazenar o conteúdo HTML
+    htmlContent += `<h3>Instituição</h3>`
     htmlContent += `<div class='instituicao'>`
     data.blocks.forEach((block) => {
       switch (block.type) {
@@ -148,7 +149,7 @@ const TextCapitulos = ({ lista, activeTitle, setActiveTitle }) => {
                  {/* Adicione esta seção para exibir as referências */}
                  {activeTitle === cap.id && references.length > 0 && (
                   <div className="references">
-                    <h3>Instituição</h3> 
+                    {/* <h3>Instituição</h3>  */}
                     <h2>{references[0].title}</h2>
                     <div dangerouslySetInnerHTML={{ __html: RefconvertToHTML({ blocks: references[0] }) }} />
                     {console.log("info das ref", references)}
