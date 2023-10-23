@@ -104,8 +104,8 @@ const TextCapitulos = ({ lista, activeTitle, setActiveTitle }) => {
           htmlContent += `<p class="paragrafo">${block.data.text}</p>`;
           break;
         default:
-          const anchor1 = block.data.text.replace(/ /g, "_"); // Criar âncora
-          htmlContent += `<h${block.data.level} class="titulo" id='${anchor}'>${block.data.text}</h${block.data.level}>`;
+          // const anchor1 = block.data.text.replace(/ /g, "_"); // Criar âncora
+          // htmlContent += `<h${block.data.level} class="titulo" id='${anchor}'>${block.data.text}</h${block.data.level}>`;
           break;
       }
     });
@@ -144,10 +144,11 @@ const TextCapitulos = ({ lista, activeTitle, setActiveTitle }) => {
                 {activeTitle === cap.id && (
                   <div dangerouslySetInnerHTML={{ __html: convertToHTML(JSON.parse(cap.attributes.description)) }} />
                 )}
-                <h3>Instituição</h3>
+                {/* <h3>Instituição</h3> */}
                  {/* Adicione esta seção para exibir as referências */}
                  {activeTitle === cap.id && references.length > 0 && (
                   <div className="references">
+                    <h3>Instituição</h3> 
                     <h2>{references[0].title}</h2>
                     <div dangerouslySetInnerHTML={{ __html: RefconvertToHTML({ blocks: references[0] }) }} />
                     {console.log("info das ref", references)}
