@@ -70,14 +70,6 @@ input.form-control {
     margin-left: 1rem;
 }
 
-#logo-ifms {
-    height: 2rem;
-}
-
-#logo-embrapa {
-    height: 3rem !important;
-}
-
 .navbar-toggler {
     border: none !important; 
 }
