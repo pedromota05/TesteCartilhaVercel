@@ -297,9 +297,9 @@ export const Capitulos = () => {
                             </div>
 
                             <li className="nav-item">
-                                <Image src={LogoIF} className='logotipo me-3 img' width="100%" height={32} alt="Logotipo do IFMS Campus Dourados" priority/>
+                                <Image src={LogoIF} className='logotipo img' width="100%" height={32} alt="Logotipo do IFMS Campus Dourados" priority/>
                             </li>
-                            <li className="nav-item me-3 me-lg-0">
+                            <li className="nav-item me-lg-0">
                                 <Image src={LogoEmbrapa} className='logotipo img' width="100%" height={48} alt="Logotipo da Embrapa" priority/>
                             </li>
 
