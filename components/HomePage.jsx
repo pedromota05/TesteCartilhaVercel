@@ -97,7 +97,7 @@ export const HomePage = () => {
                                     <Image src={LogoIF} className='logotipo' width={130} height={35} alt="Logotiopo do IFMS Campus Dourados" priority/>
                                 </li>
                                 <li className="nav-item second-logo-inst">
-                                    <Image src={LogoEmbrapa} className='logotipo' width={75} height={48} alt="Logotiopo da Embrapa" priority/>
+                                    <Image src={LogoEmbrapa} className='logotipo' width={72} height={48} alt="Logotiopo da Embrapa" priority/>
                                 </li>
                             </ul>
                         </div>
