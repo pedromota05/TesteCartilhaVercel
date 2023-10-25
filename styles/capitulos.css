@@ -709,6 +709,6 @@ hr {
   }
   .bd-toc-container {
     max-width: 350px;
-    max-height: calc(100vh - 400px) !important;
+    max-height: calc(100vh - 350px) !important;
   }
 }
