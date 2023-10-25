@@ -339,6 +339,7 @@ hr {
   top: 120px;
   overflow-y: auto;
   margin-right: 15px !important; 
+  margin-left: 10px;
 }
 
 /* .bd-toc {
