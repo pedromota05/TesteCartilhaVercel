@@ -94,10 +94,10 @@ export const HomePage = () => {
                             </form>
                             <ul className="navbar-nav d-flex links-logo flex-row">
                                 <li className="nav-item second-logo-inst">
-                                    <Image src={LogoIF} className='logotipo' width={133} height={32} alt="Logotiopo do IFMS Campus Dourados" priority/>
+                                    <Image src={LogoIF} className='logotipo' width={132} height={32} alt="Logotiopo do IFMS Campus Dourados" priority/>
                                 </li>
                                 <li className="nav-item second-logo-inst">
-                                    <Image src={LogoEmbrapa} className='logotipo' width={84} height={48} alt="Logotiopo da Embrapa" priority/>
+                                    <Image src={LogoEmbrapa} className='logotipo' width={83} height={48} alt="Logotiopo da Embrapa" priority/>
                                 </li>
                             </ul>
                         </div>
