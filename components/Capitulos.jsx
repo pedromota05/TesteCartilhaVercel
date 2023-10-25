@@ -297,10 +297,10 @@ export const Capitulos = () => {
                             </div>
 
                             <li className="nav-item">
-                                <Image src={LogoIF} className='logotipo img' width="100%" height={32} alt="Logotipo do IFMS Campus Dourados" priority/>
+                                <Image src={LogoIF} className='logotipo img' width={130} height={35} alt="Logotipo do IFMS Campus Dourados" priority/>
                             </li>
                             <li className="nav-item me-lg-0">
-                                <Image src={LogoEmbrapa} className='logotipo img' width="100%" height={48} alt="Logotipo da Embrapa" priority/>
+                                <Image src={LogoEmbrapa} className='logotipo img' width={70} height={48} alt="Logotipo da Embrapa" priority/>
                             </li>
 
                             {/* Input Search para tela menor que 992px */}
