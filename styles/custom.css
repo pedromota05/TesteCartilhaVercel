@@ -71,11 +71,11 @@ input.form-control {
 }
 
 #logo-ifms {
-    height: 2rem;
+    height: 2rem !important;
 }
 
 #logo-embrapa {
-    height: 3rem;
+    height: 3rem !important;
 }
 
 .navbar-toggler {
