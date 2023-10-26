@@ -1,35 +1,25 @@
 import { useState, useEffect, useRef } from 'react';
 import TableOfContents from './TableOfContents';
-
+let i = 0;
 const TextCapitulos = ({ lista, activeTitle, setActiveTitle }) => {
   const [headerBlocks, setHeaderBlocks] = useState([]);
-  const [references, setReferences] = useState([]);
 
   useEffect(() => {
     const extractedHeaderBlocks = [];
-    const extractedReferences = [];
 
     lista.forEach((cap) => {
       const blocks = JSON.parse(cap.attributes.description).blocks;
-      const refs = cap.attributes.referencias; // Assuming referencias is an array
-
-      if (refs && refs.length > 0) {
-        const refBlocks = JSON.parse(refs[0].description).blocks;
-        extractedReferences.push(refBlocks);
-
-        console.log(refBlocks);
-      }
       blocks.forEach((block) => {
         if (block.type === 'header') {
           extractedHeaderBlocks.push(block);
         }
       });
+      i++;
     });
     setHeaderBlocks(extractedHeaderBlocks);
-    setReferences(extractedReferences);
-    console.log("headerBlocks:", extractedHeaderBlocks);
+    // console.log("headerBlocks:", extractedHeaderBlocks);
   }, [lista]);
-  
+
 
   function convertToHTML(data) {
     let htmlContent = ''; // Variável para armazenar o conteúdo HTML
@@ -93,13 +83,16 @@ const TextCapitulos = ({ lista, activeTitle, setActiveTitle }) => {
 
   function RefconvertToHTML(data) {
     let htmlContent = ''; // Variável para armazenar o conteúdo HTML
-    htmlContent += `<h3>Instituição</h3>`
+    // htmlContent += `<h3>Instituição</h3>`
     htmlContent += `<div class='instituicao'>`
     data.blocks.forEach((block) => {
       switch (block.type) {
         case 'header':
           const anchor = block.data.text.replace(/ /g, "_"); // Criar âncora
-          htmlContent += `<h${block.data.level} class="nome-instituicao" id='${anchor}'>${block.data.text}</h${block.data.level}>`;
+          //mudei pra não bugar o titulo verde
+          // htmlContent += `<h${block.data.level} class="nome-instituicao" id='${anchor}'>${block.data.text}</h$1>`;
+          htmlContent += `<h4 class="nome-instituicao" id='${anchor}'>${block.data.text}</h4>`;
+
           break;
         case 'paragraph':
           htmlContent += `<p class="paragrafo">${block.data.text}</p>`;
@@ -113,7 +106,7 @@ const TextCapitulos = ({ lista, activeTitle, setActiveTitle }) => {
     htmlContent += `</div>`
     return htmlContent;
   }
-  const chapterRefs = useRef({}); // Use useRef para armazenar referências a elementos de capítulo
+
   const currentIndex = lista.findIndex((cap) => cap.id === activeTitle);
   const prevChapter = lista[currentIndex - 1];
   const nextChapter = lista[currentIndex + 1];
@@ -135,7 +128,7 @@ const TextCapitulos = ({ lista, activeTitle, setActiveTitle }) => {
         <div className="text-content">
           <article className='article'>
             {lista.map((cap) => (
-              <div key={cap.id} className="bd-content ps-lg-2" ref={(el) => (chapterRefs.current[cap.id] = el)}>
+              <div key={cap.id} className="bd-content ps-lg-2">
                 {activeTitle === cap.id && (
                   <h1>{cap.attributes.title}</h1>
                 )}
@@ -145,16 +138,32 @@ const TextCapitulos = ({ lista, activeTitle, setActiveTitle }) => {
                 {activeTitle === cap.id && (
                   <div dangerouslySetInnerHTML={{ __html: convertToHTML(JSON.parse(cap.attributes.description)) }} />
                 )}
-                {/* <h3>Instituição</h3> */}
-                 {/* Adicione esta seção para exibir as referências */}
-                 {activeTitle === cap.id && references.length > 0 && (
-                  <div className="references">
-                    {/* <h3>Instituição</h3>  */}
-                    <h2>{references[0].title}</h2>
-                    <div dangerouslySetInnerHTML={{ __html: RefconvertToHTML({ blocks: references[0] }) }} />
-                    {console.log("info das ref", references)}
+
+                {/* {activeTitle === cap.id && cap.attributes.referencias && ( */}
+                {activeTitle === cap.id && cap.attributes.referencias && cap.attributes.referencias.length > 0 && cap.attributes.referencias.description !=null && (
+
+                  <div className="references-section">
+                    <h3>Instituição</h3>
+                    {cap.attributes.referencias.map((ref, index) => (
+                      <div key={index} className="reference">
+                        {ref.description && (
+                          <div
+                            className="reference-content"
+                            dangerouslySetInnerHTML={{ __html: RefconvertToHTML(JSON.parse(ref.description)) }}
+
+                            // dangerouslySetInnerHTML={{
+                            //   __html: JSON.parse(ref.description).blocks[0].data.text
+                            // }}
+                            // {convertToHTML(JSON.parse(ref.description))}
+                          />
+                        )}
+                        {console.log("instituicao",cap.attributes.referencias)} 
+                       {/* Estilize cada referência conforme necessário */}
+                      </div>
+                    ))}
                   </div>
                 )}
+
               </div>
             ))}
           </article>
