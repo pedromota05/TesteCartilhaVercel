@@ -139,8 +139,8 @@ const TextCapitulos = ({ lista, activeTitle, setActiveTitle }) => {
                   <div dangerouslySetInnerHTML={{ __html: convertToHTML(JSON.parse(cap.attributes.description)) }} />
                 )}
 
-                {/* {activeTitle === cap.id && cap.attributes.referencias && ( */}
-                {activeTitle === cap.id && cap.attributes.referencias && cap.attributes.referencias.length > 0 && cap.attributes.referencias.description !=null && (
+                {/* {activeTitle === cap.id && cap.attributes.referencias && cap.attributes.referencias.length > 0 && cap.attributes.referencias.description != null && ( */}
+                {activeTitle === cap.id && cap.attributes.referencias && cap.attributes.referencias.length > 0 && cap.attributes.referencias[0].description != null && (
 
                   <div className="references-section">
                     <h3>Instituição</h3>
