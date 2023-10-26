@@ -97,6 +97,9 @@ const TextCapitulos = ({ lista, activeTitle, setActiveTitle }) => {
         case 'paragraph':
           htmlContent += `<p class="paragrafo">${block.data.text}</p>`;
           break;
+        case 'LinkTool':
+          htmlContent += `<a id='links-sites' href="${block.data.link}" target="_blank" title="Acessar site" class="paragrafo">${block.data.link}</a>`;
+        break;
         default:
           // const anchor1 = block.data.text.replace(/ /g, "_"); // Criar âncora
           // htmlContent += `<h${block.data.level} class="titulo" id='${anchor}'>${block.data.text}</h${block.data.level}>`;
