@@ -177,7 +177,7 @@ export const Capitulos = () => {
             {/* Div que Pega todo o Conteúdo da Página */}
             <div className="container-wrapper">
                 {/* Código Sidebar */}
-                <nav id="sidebarMenu" className={`collapse d-lg-block sidebar bg-white thin-scrollbar offcanvas ${isOffcanvasOpen ? 'show' : ''}`} tabIndex="-1">
+                <nav id="sidebarMenu" className={`collapse d-lg-block sidebar bg-white thin-scrollbar ${isOffcanvasOpen ? 'show' : ''}`} tabIndex="-1">
                     <div className="position-sticky">
                         <div id="summary" className="list-group list-group-flush mt-2 py-2" style={{ display: showSummary ? 'block' : 'none' }}>
                             {/* Logo IF / Embrapa Dentro do Menu */}
