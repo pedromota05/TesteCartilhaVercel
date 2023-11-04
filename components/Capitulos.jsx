@@ -186,7 +186,7 @@ export const Capitulos = () => {
                                     <Link href="/home">
                                         <Image className="img-sidebar-top mx-3" src={LogoIFEmbrapa} alt="logo Embrapa com letras em azul com um símbolo verde, sendo que as letras em cima do símbolo são brancas" width="45%" height={46} priority/>
                                     </Link>
-                                    <button id="btn-close-sidebar" type="button" className="btn-close btn-close-dark btn-close-cap" data-bs-dismiss="collapse" aria-label="Close" onClick={() => { closeSidebar(); setShowSummary(false); }}></button>
+                                    <button id="btn-close-sidebar" type="button" className="btn-close btn-close-dark btn-close-cap" data-bs-dismiss="collapse" aria-label="Close" onClick={closeSidebar}></button>
                                 </div>
                             </div>
                             <hr className="featurette-divider line-menu"></hr>
