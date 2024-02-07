@@ -104,7 +104,7 @@ export const Capitulos = () => {
     }, [query.activeChapter]);
 
     const CarregaCapitulos = async () => {
-        const url = 'https://api-cartilha.onrender.com/api/capitulos?populate=*';
+        const url = 'https://api-cartilha-production.up.railway.app/api/capitulos?populate=*';
         try {
             const response = await fetch(url);
             if (response.ok) {
