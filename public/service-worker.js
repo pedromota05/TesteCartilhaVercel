@@ -11,7 +11,7 @@ workbox.routing.registerRoute(
 
 // Rota para a API de autores
 workbox.routing.registerRoute(
-  new RegExp('https://api-cartilha-production.up.railway.app/api/autors.*'),
+  new RegExp('https://api-cartilha-production.up.railway.app/api/autors'),
   new workbox.strategies.NetworkFirst({
     cacheName: 'api-autores-cache',
   })
