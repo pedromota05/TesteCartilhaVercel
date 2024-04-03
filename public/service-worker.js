@@ -3,7 +3,7 @@ importScripts('https://storage.googleapis.com/workbox-cdn/releases/6.2.0/workbox
 
 // Rota para a API de capítulos
 workbox.routing.registerRoute(
-  new RegExp('https://api-cartilha-production.up.railway.app/api/capitulos\\?populate=.*'),
+  new RegExp('https://api-cartilha-teste-production.up.railway.app/api/capitulos?populate=*'),
   new workbox.strategies.NetworkFirst({
     cacheName: 'api-capitulos-cache',
   })
