@@ -18,7 +18,7 @@ export const Autores = () => {
     }, []);
 
     const CarregaAutores = async () => {
-        const url = 'https://api-cartilha-production.up.railway.app/api/autors?populate=*';
+        const url = 'https://api-cartilha-teste-production.up.railway.app/api/autors?populate=*';
         try {
             const response = await fetch(url);
             if (response.ok) {
